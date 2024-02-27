@@ -12,6 +12,7 @@ function ChipsComponent(props: IChipProps) {
 
     return (
         <button
+            onClick={props.onEmitEvent}
             className={`inline-flex items-center px-3 py-1 text-sm font-medium rounded-full cursor-pointer focus:outline-none focus:shadow-outline ${contextualClass} gap-2`}
         >
             {isChipWithAvatar(props) && (
