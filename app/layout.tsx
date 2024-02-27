@@ -1,4 +1,5 @@
 import './global.css';
+import NavbarComponent from './library/navbar/navbar';
 
 export const metadata = {
     title: 'Welcome to voicify',
@@ -12,7 +13,10 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body>{children}</body>
+            <body>
+                <NavbarComponent></NavbarComponent>
+                <main>{children}</main>
+            </body>
         </html>
     );
 }
