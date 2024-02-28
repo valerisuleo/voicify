@@ -8,6 +8,7 @@ import ImageComponent from '../library/image/image';
 import LikeComponent from '../library/like/like';
 import ButtonComponent from '../library/buttons/button';
 import { IBtn } from '../library/buttons/interfaces';
+import HeroComponent from '../library/hero/hero';
 
 const HomePage = () => {
     const handleClick = () => {
@@ -52,7 +53,12 @@ const HomePage = () => {
     };
 
     return (
-        <div>
+        <div className="p-7">
+            <div className="m-6">
+                <HeroComponent variant="image" imageSrc="/rosa.jpg">
+                    <p>This is a HeroComponent component with a background color.</p>
+                </HeroComponent>
+            </div>
             <ChipsComponent
                 label={'Primary'}
                 classes={'primary'}

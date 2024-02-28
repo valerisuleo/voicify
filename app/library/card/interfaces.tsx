@@ -9,6 +9,8 @@ export interface ICard {
         cardText?: string;
         children?: ReactNode;
     };
+    borderless?: boolean;
+
 }
 
 

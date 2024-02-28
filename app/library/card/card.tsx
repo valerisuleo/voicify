@@ -1,7 +1,7 @@
 import { ICard } from './interfaces';
 
-const CardComponent = ({ header, body }: ICard) => {
-    const card = 'rounded overflow-hidden border border-gray-200';
+const CardComponent = ({ header, body, borderless }: ICard) => {
+    const card = borderless ? 'rounded overflow-hidden' : 'rounded overflow-hidden border border-gray-200';
     const cardBody = 'px-6 py-4';
     const cardTitle = 'font-bold text-xl mb-2';
     const cardText = 'text-gray-700 text-base mb-5';
