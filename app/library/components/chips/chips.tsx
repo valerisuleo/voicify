@@ -14,7 +14,7 @@ function ChipsComponent(props: IChipProps) {
         <button
             type="button"
             onClick={props.onEmitEvent}
-            className={`inline-flex items-center px-3 py-1 text-sm font-medium rounded-full cursor-pointer focus:outline-none focus:shadow-outline ${contextualClass} gap-2`}
+            className={`inline-flex items-center px-3 py-2 text font-bold rounded-full cursor-pointer focus:outline-none focus:shadow-outline ${contextualClass} gap-2`}
         >
             {isChipWithAvatar(props) && (
                 <div className="w-6 h-6 rounded-full overflow-hidden flex-shrink-0">

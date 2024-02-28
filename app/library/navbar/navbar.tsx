@@ -2,6 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 import styles from './navbar.module.scss';
 import { svgList, navLinks } from './config';
+import ButtonComponent from '../components/buttons/button';
+import ChipsComponent from '../components/chips/chips';
+import ImageComponent from '../components/image/image';
 
 const NavbarComponent = () => {
     return (
@@ -34,10 +37,16 @@ const NavbarComponent = () => {
                             <Link
                                 key={i}
                                 className="text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-xl font-medium cursor-pointer whitespace-nowrap"
-                                href={''}
+                                href={item.path}
                             >
                                 {' '}
-                                <span className="icon mr-2">{item.icon}</span>
+                                <div className={styles['icon-container']}>
+                                    <ImageComponent
+                                        src={`/${item.src}.svg`}
+                                        width={100}
+                                        height={100}
+                                    />
+                                </div>
                                 {item.label}
                             </Link>
                         ))}
@@ -45,14 +54,21 @@ const NavbarComponent = () => {
 
                     {/* Avatar and Button Section */}
                     <div className="ml-6 flex items-center">
-                        {/* <img
-                            className="h-8 w-8 rounded-full"
-                            src="/path-to-your-avatar.jpg"
-                            alt="User Avatar"
-                        /> */}
-                        <button className="ml-4 bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            Upgrade
-                        </button>
+                        <ChipsComponent
+                            label={'32'}
+                            classes={'secondary'}
+                            src={'/crypto.svg'}
+                            width={100}
+                            height={100}
+                        ></ChipsComponent>
+
+                        <div className={`${styles['icon-container']} ${styles['avatar']}`}>
+                            <ImageComponent
+                                src="/avatar.jpg"
+                                width={100}
+                                height={100}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

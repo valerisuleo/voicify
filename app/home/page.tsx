@@ -46,7 +46,7 @@ const HomePage = () => {
     };
 
     const propsBtn: IBtn = {
-        label: 'Primary',
+        label: 'primary',
         classes: 'primary',
         type: 'button',
         onEmitEvent: handleClick,
@@ -61,11 +61,11 @@ const HomePage = () => {
                 </HeroComponent>
             </div>
             <ChipsComponent
-                label={'Primary'}
-                classes={'primary'}
+                label={'Music'}
+                classes={'secondary'}
                 src={'/avatar.jpg'}
-                width={50}
-                height={50}
+                width={100}
+                height={100}
             ></ChipsComponent>
 
             <div className="max-w-sm my-10">
@@ -81,6 +81,7 @@ const HomePage = () => {
             <div className="m-6">
                 <ButtonComponent {...propsBtn}></ButtonComponent>
             </div>
+
         </div>
     );
 };

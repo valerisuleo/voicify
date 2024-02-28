@@ -1,105 +1,32 @@
 export const navLinks = [
     {
-        path: '',
+        path: '/home',
         label: 'Home',
-        icon: (
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-            >
-                <path
-                    d="M10.6667 21.3334H21.3333M5.33334 12V26.6667H26.6667V12L16 3.33337L5.33334 12Z"
-                    stroke="black"
-                    strokeWidth="3"
-                    strokeLinecap="square"
-                />
-            </svg>
-        ),
+        src: 'home',
         isActive: true,
     },
     {
         path: '',
         label: 'My Library',
-        icon: (
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-            >
-                <path
-                    d="M10.6667 5.33337V26.6667M5.33333 13.3334V18.6667M16 10.6667V21.3334M21.3333 8.00004V24M26.6667 13.3334V18.6667"
-                    stroke="black"
-                    strokeWidth="3"
-                    strokeLinecap="square"
-                />
-            </svg>
-        ),
+        src: 'voice',
         isActive: false,
     },
     {
         path: '',
         label: 'Community',
-        icon: (
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-            >
-                <path
-                    d="M24 24H18.6667V28H9.33333C9.33333 24.6344 9.51294 21.8861 7.31884 19.089C6.07499 17.5033 5.33333 15.505 5.33333 13.3333C5.33333 8.17868 9.51201 4 14.6667 4C18.4665 4 21.9651 5.82379 23.4073 9.51039C24.4179 12.0936 25.7843 13.6764 27.3333 16L24 18V24Z"
-                    stroke="black"
-                    strokeWidth="3"
-                    strokeLinecap="square"
-                />
-            </svg>
-        ),
+        src: 'head',
         isActive: false,
     },
     {
         path: '',
         label: 'Pricing',
-        icon: (
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-            >
-                <path
-                    d="M17.5 9.33333V7.83333H14.5V9.33333H17.5ZM14.5 10.6667V12.1667H17.5V10.6667H14.5ZM17.5 21.3333V19.8333H14.5V21.3333H17.5ZM14.5 22.6667V24.1667H17.5V22.6667H14.5ZM26.5 16C26.5 21.799 21.799 26.5 16 26.5V29.5C23.4558 29.5 29.5 23.4558 29.5 16H26.5ZM16 26.5C10.201 26.5 5.5 21.799 5.5 16H2.5C2.5 23.4558 8.54416 29.5 16 29.5V26.5ZM5.5 16C5.5 10.201 10.201 5.5 16 5.5V2.5C8.54416 2.5 2.5 8.54416 2.5 16H5.5ZM16 5.5C21.799 5.5 26.5 10.201 26.5 16H29.5C29.5 8.54416 23.4558 2.5 16 2.5V5.5ZM14.5 9.33333V10.6667H17.5V9.33333H14.5ZM14.5 21.3333V22.6667H17.5V21.3333H14.5ZM16 19.1667C14.2511 19.1667 12.8333 17.7489 12.8333 16H9.83333C9.83333 19.4058 12.5942 22.1667 16 22.1667V19.1667ZM12.8333 16C12.8333 14.2511 14.2511 12.8333 16 12.8333V9.83333C12.5942 9.83333 9.83333 12.5942 9.83333 16H12.8333ZM16 12.8333C17.1501 12.8333 18.1587 13.4456 18.7152 14.3691L21.2848 12.8208C20.2081 11.0339 18.245 9.83333 16 9.83333V12.8333ZM18.7152 17.6309C18.1587 18.5544 17.1501 19.1667 16 19.1667V22.1667C18.245 22.1667 20.2081 20.9661 21.2848 19.1792L18.7152 17.6309Z"
-                    fill="black"
-                />
-            </svg>
-        ),
+        src: 'coin',
         isActive: false,
     },
     {
         path: '',
         label: 'Contact',
-        icon: (
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-            >
-                <path
-                    d="M18.6667 27L26.6667 5.33337L5 13.3334L14.6667 17.3334L18.6667 27Z"
-                    stroke="black"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                />
-            </svg>
-        ),
+        src: 'send',
         isActive: false,
     },
 ];
