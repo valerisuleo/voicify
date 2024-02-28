@@ -1,14 +1,14 @@
 'use client';
 
 import React from 'react';
-import ChipsComponent from '../library/chips/chips';
-import CardComponent from '../library/card/card';
-import { ICard } from '../library/card/interfaces';
-import ImageComponent from '../library/image/image';
-import LikeComponent from '../library/like/like';
-import ButtonComponent from '../library/buttons/button';
-import { IBtn } from '../library/buttons/interfaces';
-import HeroComponent from '../library/hero/hero';
+import ChipsComponent from '../library/components/chips/chips';
+import CardComponent from '../library/components/card/card';
+import { ICard } from '../library/components/card/interfaces';
+import ImageComponent from '../library/components/image/image';
+import LikeComponent from '../library/components/like/like';
+import ButtonComponent from '../library/components/buttons/button';
+import { IBtn } from '../library/components/buttons/interfaces';
+import HeroComponent from '../library/components/hero/hero';
 
 const HomePage = () => {
     const handleClick = () => {
