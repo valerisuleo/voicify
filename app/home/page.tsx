@@ -6,6 +6,8 @@ import CardComponent from '../library/card/card';
 import { ICard } from '../library/card/interfaces';
 import ImageComponent from '../library/image/image';
 import LikeComponent from '../library/like/like';
+import ButtonComponent from '../library/buttons/button';
+import { IBtn } from '../library/buttons/interfaces';
 
 const HomePage = () => {
     const handleClick = () => {
@@ -16,7 +18,7 @@ const HomePage = () => {
         console.log('like');
     };
 
-    const props: ICard = {
+    const propsCard: ICard = {
         header: {
             children: (
                 <ImageComponent
@@ -41,6 +43,14 @@ const HomePage = () => {
             ),
         },
     };
+
+    const propsBtn: IBtn = {
+        label: 'Primary',
+        classes: 'primary',
+        type: 'button',
+        onEmitEvent: handleClick,
+    };
+
     return (
         <div>
             <ChipsComponent
@@ -49,15 +59,20 @@ const HomePage = () => {
                 src={'/avatar.jpg'}
                 width={50}
                 height={50}
-                onEmitEvent={handleClick}
             ></ChipsComponent>
 
             <div className="max-w-sm my-10">
-                <CardComponent {...props}></CardComponent>
+                <CardComponent {...propsCard}></CardComponent>
             </div>
 
-            <div className='my-6'>
-                <LikeComponent color='pink' onEmitEvent={handleLike}></LikeComponent>
+            <div className="my-6">
+                <LikeComponent
+                    color="pink"
+                    onEmitEvent={handleLike}
+                ></LikeComponent>
+            </div>
+            <div className="m-6">
+                <ButtonComponent {...propsBtn}></ButtonComponent>
             </div>
         </div>
     );

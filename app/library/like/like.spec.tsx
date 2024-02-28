@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { render, fireEvent, screen } from '@testing-library/react';
 import Like from './like';
 import '@testing-library/jest-dom';
@@ -10,7 +11,7 @@ describe('Like', () => {
 
     it('should start with the default (unliked) state', () => {
         render(<Like onEmitEvent={() => {}} />);
-        const unlikedIcon = screen.queryByTestId('unliked-icon'); // Make sure to add data-testid='unliked-icon' to your FaRegHeart component
+        const unlikedIcon = screen.queryByTestId('unliked-icon');
         expect(unlikedIcon).toBeInTheDocument();
     });
 
