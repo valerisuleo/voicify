@@ -5,10 +5,15 @@ import ChipsComponent from '../library/chips/chips';
 import CardComponent from '../library/card/card';
 import { ICard } from '../library/card/interfaces';
 import ImageComponent from '../library/image/image';
+import LikeComponent from '../library/like/like';
 
 const HomePage = () => {
     const handleClick = () => {
         console.log('fire');
+    };
+
+    const handleLike = () => {
+        console.log('like');
     };
 
     const props: ICard = {
@@ -49,6 +54,10 @@ const HomePage = () => {
 
             <div className="max-w-sm my-10">
                 <CardComponent {...props}></CardComponent>
+            </div>
+
+            <div className='my-6'>
+                <LikeComponent color='pink' onEmitEvent={handleLike}></LikeComponent>
             </div>
         </div>
     );
