@@ -53,6 +53,7 @@ const HomePage = () => {
     };
 
     return (
+        
         <div className="p-7">
             <div className="m-6">
                 <HeroComponent variant="image" imageSrc="/rosa.jpg">
