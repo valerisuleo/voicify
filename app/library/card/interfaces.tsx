@@ -11,8 +11,7 @@ export interface ICard {
     };
 }
 
-export interface ICardImage {
-    path: string;
-    width: number;
-    height: number;
-}
+
+
+
+

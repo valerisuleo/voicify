@@ -1,4 +1,5 @@
 import { ContextualClass } from '../../common/interfaces/contextual';
+import { Img } from '../image/interfaces';
 
 // Base interface for a chip
 interface IChip {
@@ -7,12 +8,7 @@ interface IChip {
     onEmitEvent?: () => void;
 }
 
-// Extension for a chip that includes an avatar
-export interface IChipAvatar extends IChip {
-    src: string;
-    width: number;
-    height: number;
-}
+export type IChipAvatar = IChip & Img;
 
 // Using union type to allow for both chip types
 export type IChipProps = IChip | IChipAvatar;
