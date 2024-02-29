@@ -2,7 +2,14 @@
     height: 32px;
     width: 32px;
     margin-right: 0.5rem;
+
+    // Tablet adjustments
+    @media (min-width: 768px) {
+        height: 24px; // Adjusted for tablet
+        width: 24px; // Adjusted for tablet
+    }
 }
+
 
 .avatar {
     height: 40px;

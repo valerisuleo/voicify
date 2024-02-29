@@ -19,11 +19,6 @@ const data = [
         genre: '',
     },
     {
-        name: 'music',
-        label: 'music',
-        genre: '',
-    },
-    {
         name: 'gaming',
         label: 'gaming',
         genre: '',

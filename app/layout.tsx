@@ -15,13 +15,20 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <html lang="en">
-                <body>
+            <body>
+                <div>
                     <NavbarComponent />
-                    <main className={grid.container}>{children}</main>
+                </div>
+                <main
+                    className={grid.container}
+                    style={{ boxSizing: 'border-box' }}
+                >
+                    {children}
+                </main>
+                <div>
                     <FooterComponent />
-                </body>
-            </html>
+                </div>
+            </body>
         </html>
     );
 }

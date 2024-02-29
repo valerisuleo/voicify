@@ -9,7 +9,13 @@ module.exports = {
         './src/**/*.{js,ts,jsx,tsx,mdx}',
     ],
     theme: {
-        extend: {},
+        extend: {
+            screens: {
+                'xs': '400px', // Adding a custom breakpoint at 480px
+                'sm': '640px', // Customizing the small breakpoint
+
+              },
+        },
     },
     plugins: [],
 };

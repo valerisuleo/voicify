@@ -1,7 +1,6 @@
 export const grid = {
     container: 'max-w-full mx-auto p-8 sm:px-6 lg:px-8',
     'container-fluid': 'w-full',
-    
     // Rows
     row: 'p-2 w-full flex flex-wrap',
 
@@ -34,6 +33,20 @@ export const grid = {
     'col-sm-10': 'p-2 w-full sm:w-10/12',
     'col-sm-11': 'p-2 w-full sm:w-11/12',
     'col-sm-12': 'p-2 w-full sm:w-full',
+
+    'col-xs': 'p-2 w-full xs:flex-grow',
+    'col-xs-1': 'p-2 w-full xs:w-1/12',
+    'col-xs-2': 'p-2 w-full xs:w-2/12',
+    'col-xs-3': 'p-2 w-full xs:w-3/12',
+    'col-xs-4': 'p-2 w-full xs:w-4/12',
+    'col-xs-5': 'p-2 w-full xs:w-5/12',
+    'col-xs-6': 'p-2 w-full xs:w-6/12',
+    'col-xs-7': 'p-2 w-full xs:w-7/12',
+    'col-xs-8': 'p-2 w-full xs:w-8/12',
+    'col-xs-9': 'p-2 w-full xs:w-9/12',
+    'col-xs-10': 'p-2 w-full xs:w-10/12',
+    'col-xs-11': 'p-2 w-full xs:w-11/12',
+    'col-xs-12': 'p-2 w-full xs:w-full',
 
     // Medium (md) breakpoints
     'col-md': 'p-2 w-full md:flex-grow',

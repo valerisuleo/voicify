@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import ChipsComponent from '../library/components/chips/chips';
 import CardComponent from '../library/components/card/card';
 import { ICard } from '../library/components/card/interfaces';
@@ -11,9 +11,10 @@ import { IBtn } from '../library/components/buttons/interfaces';
 import HeroComponent from '../library/components/hero/hero';
 import ListGroupComponent from '../library/components/list-group/list-group';
 import { IListGroup } from '../library/components/list-group/interface';
-import { grid } from '../library/common/grid';
+import { getCol, grid } from '../library/common/grid';
 import { categories } from './mock';
-
+import styles from './home.module.scss';
+import useScreenDetect from '../library/common/useScreenDetect';
 const HomePage = () => {
     const handleClick = () => {
         console.log('fire');
@@ -77,6 +78,28 @@ const HomePage = () => {
         borderless: false,
     };
 
+    const screenType = useScreenDetect();
+
+    function setWidth(): string {
+        let width = '60%';
+
+        switch (screenType) {
+            case 'desktop':
+                width = '60%';
+                break;
+            case 'tablet':
+                width = '80%';
+                break;
+            case 'mobile':
+                width = '100%';
+                break;
+            default:
+                break;
+        }
+
+        return width;
+    }
+
     return (
         <Fragment>
             <HeroComponent
@@ -84,33 +107,47 @@ const HomePage = () => {
                 imageSrc="/hero.png"
                 isBreakingGrid={true}
             >
-                <div className="bg-slate-600 bg-opacity-20 rounded-full px-4 text-center">
-                    <h1 className="font-extrabold text-8xl tracking-tight">
+                <div className="bg-slate-600 bg-opacity-20 rounded-full px-4 py-8 md:py-12 md:px-8 text-center">
+                    <h1 className="font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tight">
                         Create song covers
                     </h1>
-                    <h1 className="font-extrabold text-8xl tracking-tight">
+                    <h1 className="font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tight">
                         using any voice with AI
                     </h1>
 
-                    <p className="text-white font-semibold text-xl mt-4">
+                    <p className="text-white font-semibold text-lg md:text-xl lg:text-2xl mt-4 md:mt-6">
                         The #1 platform for making high quality AI covers in
                         seconds!
                     </p>
                 </div>
             </HeroComponent>
 
-            <div className="flex justify-center mt-10">
+            <div
+                className={`${grid.row}`}
+                style={{ width: setWidth(), margin: 'auto' }}
+            >
                 {categories.map((item) => (
-                    <ChipsComponent
-                        label={item.label}
-                        classes="secondary"
+                    <div
+                        className={`${getCol(
+                            'col-xs-6',
+                            'col-md-4',
+                            'col-lg-3'
+                        )}`}
                         key={item.name}
-                        width={100}
-                        height={100}
-                        src={item.src}
-                    />
+                    >
+                        <ChipsComponent
+                            label={item.label}
+                            classes="secondary"
+                            key={item.name}
+                            width={100}
+                            height={100}
+                            src={item.src}
+                        />
+                    </div>
                 ))}
             </div>
+
+
         </Fragment>
 
         // <div className="">
