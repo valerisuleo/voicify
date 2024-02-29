@@ -9,6 +9,8 @@ import LikeComponent from '../library/components/like/like';
 import ButtonComponent from '../library/components/buttons/button';
 import { IBtn } from '../library/components/buttons/interfaces';
 import HeroComponent from '../library/components/hero/hero';
+import ListGroupComponent from '../library/components/list-group/list-group';
+import { IListGroup } from '../library/components/list-group/interface';
 
 const HomePage = () => {
     const handleClick = () => {
@@ -16,6 +18,10 @@ const HomePage = () => {
     };
 
     const handleLike = () => {
+        console.log('like');
+    };
+
+    const handleSelection = () => {
         console.log('like');
     };
 
@@ -52,12 +58,31 @@ const HomePage = () => {
         onEmitEvent: handleClick,
     };
 
+    const propsList: IListGroup = {
+        collection: [
+            {
+                id: '1',
+                name: 'Item 1',
+            },
+            {
+                id: '2',
+                name: 'Item 2',
+            },
+        ],
+        propKey: 'id',
+        propText: 'name',
+        onEmitEvent: handleSelection,
+        borderless: false,
+    };
+
     return (
-        
         <div className="p-7">
             <div className="m-6">
                 <HeroComponent variant="image" imageSrc="/rosa.jpg">
-                    <p>This is a HeroComponent component with a background color.</p>
+                    <p>
+                        This is a HeroComponent component with a background
+                        color.
+                    </p>
                 </HeroComponent>
             </div>
             <ChipsComponent
@@ -81,7 +106,9 @@ const HomePage = () => {
             <div className="m-6">
                 <ButtonComponent {...propsBtn}></ButtonComponent>
             </div>
-
+            <div className="max-w-sm m-6">
+                <ListGroupComponent {...propsList}></ListGroupComponent>
+            </div>
         </div>
     );
 };

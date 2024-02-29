@@ -1,30 +1,30 @@
 export const navLinks = [
     {
-        path: '/home',
+        route: '/home',
         label: 'Home',
         src: 'home',
         isActive: true,
     },
     {
-        path: '',
+        route: '',
         label: 'My Library',
         src: 'voice',
         isActive: false,
     },
     {
-        path: '',
+        route: '',
         label: 'Community',
         src: 'head',
         isActive: false,
     },
     {
-        path: '',
+        route: '',
         label: 'Pricing',
         src: 'coin',
         isActive: false,
     },
     {
-        path: '',
+        route: '',
         label: 'Contact',
         src: 'send',
         isActive: false,
