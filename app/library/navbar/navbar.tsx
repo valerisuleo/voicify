@@ -1,9 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
 import styles from './navbar.module.scss';
-import { svgList, navLinks } from './config';
+import { navLinks } from './config';
 import ChipsComponent from '../components/chips/chips';
 import ImageComponent from '../components/image/image';
+import { LogoComponent } from '../common/logo/logo';
 
 const NavbarComponent = () => {
     return (
@@ -11,25 +12,7 @@ const NavbarComponent = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16">
                     {/* Logo Section */}
-                    <div className="inline-flex items-center">
-                        <div className="whitespace-nowrap">
-                            {svgList.map((item, i) => (
-                                <Link
-                                    href={''}
-                                    className={`inline-flex items-center justify-center ${
-                                        i === svgList.length - 1
-                                            ? `${styles['adjust-y']}`
-                                            : ''
-                                    }`}
-                                    key={i}
-                                    style={{ marginRight: `${item.margin}px` }}
-                                >
-                                    {item.svg}
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
-
+                    <LogoComponent />
                     {/* Navigation Links Section */}
                     <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                         {navLinks.map((item, i) => (
@@ -61,7 +44,9 @@ const NavbarComponent = () => {
                             height={100}
                         ></ChipsComponent>
 
-                        <div className={`${styles['icon-container']} ${styles['avatar']}`}>
+                        <div
+                            className={`${styles['icon-container']} ${styles['avatar']}`}
+                        >
                             <ImageComponent
                                 src="/avatar.jpg"
                                 width={100}

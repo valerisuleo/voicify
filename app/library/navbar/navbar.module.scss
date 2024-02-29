@@ -1,14 +1,7 @@
-.adjust-y {
-    position: relative;
-    top: 6px;
-    left: -2px;
-}
-
 .icon-container {
     height: 32px;
     width: 32px;
     margin-right: 0.5rem;
-
 }
 
 .avatar {
@@ -20,6 +13,6 @@
     cursor: pointer;
 
     &:hover {
-        border: 2px solid #6F2DC1;
+        border: 2px solid #6f2dc1;
     }
 }
