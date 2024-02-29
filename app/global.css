@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+h1 {
+    @apply text-4xl;
+    /* Add more utility classes as needed */
+}
+
+h2 {
+    @apply text-3xl;
+    /* Additional styles */
+}
+
+h3 {
+    @apply text-2xl;
+    /* Additional styles */
+}
+
+h4 {
+    @apply text-xl;
+    /* Additional styles */
+}
+
+h5 {
+    @apply text-lg;
+    /* Additional styles */
+}
+
+h6 {
+    @apply text-base;
+    /* Additional styles */
+}
+
+p,
+span,
+li {
+    @apply text-base;
+    /* Additional paragraph styles */
+}

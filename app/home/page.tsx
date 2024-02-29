@@ -76,40 +76,55 @@ const HomePage = () => {
     };
 
     return (
-        <div className="">
-            <div className="m-6">
-                <HeroComponent variant="image" imageSrc="/rosa.jpg">
-                    <p>
-                        This is a HeroComponent component with a background
-                        color.
-                    </p>
-                </HeroComponent>
-            </div>
-            <ChipsComponent
-                label={'Music'}
-                classes={'secondary'}
-                src={'/avatar.jpg'}
-                width={100}
-                height={100}
-            ></ChipsComponent>
+        <HeroComponent
+            variant="image"
+            imageSrc="/hero.png"
+            isBreakingGrid={true}
+        >
+            <div className="bg-slate-600 bg-opacity-20 rounded-full px-4 text-center">
+                <h1 className="font-extrabold text-8xl tracking-tight">
+                    Create song covers
+                </h1>
+                <h1 className="font-extrabold text-8xl tracking-tight">
+                    using any voice with AI
+                </h1>
 
-            <div className="max-w-sm my-10">
-                <CardComponent {...propsCard}></CardComponent>
+                <p className="text-white font-semibold text-xl mt-4">
+                    The #1 platform for making high quality AI covers in
+                    seconds!
+                </p>
             </div>
+        </HeroComponent>
 
-            <div className="my-6">
-                <LikeComponent
-                    color="pink"
-                    onEmitEvent={handleLike}
-                ></LikeComponent>
-            </div>
-            <div className="m-6">
-                <ButtonComponent {...propsBtn}></ButtonComponent>
-            </div>
-            <div className="max-w-sm m-6">
-                <ListGroupComponent {...propsList}></ListGroupComponent>
-            </div>
-        </div>
+        // <div className="">
+        //     <div className="m-6">
+
+        //     </div>
+        //     <ChipsComponent
+        //         label={'Music'}
+        //         classes={'secondary'}
+        //         src={'/avatar.jpg'}
+        //         width={100}
+        //         height={100}
+        //     ></ChipsComponent>
+
+        //     <div className="max-w-sm my-10">
+        //         <CardComponent {...propsCard}></CardComponent>
+        //     </div>
+
+        //     <div className="my-6">
+        //         <LikeComponent
+        //             color="pink"
+        //             onEmitEvent={handleLike}
+        //         ></LikeComponent>
+        //     </div>
+        //     <div className="m-6">
+        //         <ButtonComponent {...propsBtn}></ButtonComponent>
+        //     </div>
+        //     <div className="max-w-sm m-6">
+        //         <ListGroupComponent {...propsList}></ListGroupComponent>
+        //     </div>
+        // </div>
     );
 };
 

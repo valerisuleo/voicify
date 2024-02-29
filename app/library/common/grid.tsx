@@ -1,6 +1,7 @@
 export const grid = {
     container: 'max-w-full mx-auto p-8 sm:px-6 lg:px-8',
     'container-fluid': 'w-full',
+    
     // Rows
     row: 'p-2 w-full flex flex-wrap',
 
