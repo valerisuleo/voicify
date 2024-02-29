@@ -1,4 +1,6 @@
 import './global.css';
+import { grid } from './library/common/grid';
+import FooterComponent from './library/footer/footer';
 import NavbarComponent from './library/navbar/navbar';
 
 export const metadata = {
@@ -13,10 +15,13 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body>
-                <NavbarComponent></NavbarComponent>
-                <main>{children}</main>
-            </body>
+            <html lang="en">
+                <body>
+                    <NavbarComponent />
+                    <main className={grid.container}>{children}</main>
+                    <FooterComponent />
+                </body>
+            </html>
         </html>
     );
 }

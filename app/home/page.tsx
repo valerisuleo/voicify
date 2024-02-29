@@ -11,7 +11,6 @@ import { IBtn } from '../library/components/buttons/interfaces';
 import HeroComponent from '../library/components/hero/hero';
 import ListGroupComponent from '../library/components/list-group/list-group';
 import { IListGroup } from '../library/components/list-group/interface';
-import FooterComponent from '../library/footer/footer';
 
 const HomePage = () => {
     const handleClick = () => {
@@ -77,7 +76,7 @@ const HomePage = () => {
     };
 
     return (
-        <div className="p-7">
+        <div className="">
             <div className="m-6">
                 <HeroComponent variant="image" imageSrc="/rosa.jpg">
                     <p>
@@ -109,9 +108,6 @@ const HomePage = () => {
             </div>
             <div className="max-w-sm m-6">
                 <ListGroupComponent {...propsList}></ListGroupComponent>
-            </div>
-            <div className="m-6">
-               <FooterComponent></FooterComponent>
             </div>
         </div>
     );

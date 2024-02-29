@@ -1,30 +1,56 @@
+'use client';
 import React from 'react';
+import { grid } from '../common/grid';
+import ListGroupComponent from '../components/list-group/list-group';
+import { navLinks } from './config';
+import { useRouter } from 'next/navigation';
+import { IFooterLink } from './interfaces';
 
 const FooterComponent = () => {
+    const router = useRouter();
 
+    const handleNavigation = (current: IFooterLink) => {
+        if (current.route) {
+            router.push(`/${current.route}`);
+        }
+    };
 
     return (
-        <footer className="bg-gray-800 text-white text-center p-4">
-            <div className="container mx-auto">
-                <p>
-                    © {new Date().getFullYear()} Your Company Name. All rights
-                    reserved.
-                </p>
-                <p>
-                    Follow us on
-                    <a href="#" className="text-blue-400 ml-2">
-                        Facebook
-                    </a>
-                    ,
-                    <a href="#" className="text-blue-400 ml-2">
-                        Twitter
-                    </a>
-                    , and
-                    <a href="#" className="text-blue-400 ml-2">
-                        Instagram
-                    </a>
-                    .
-                </p>
+        <footer className="p-4 border-t border-gray-200">
+            <div className={grid.row}>
+                <div className={grid['col-md-3']}>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Nulla assumenda accusamus magnam voluptatum quos veniam
+                    aliquam totam impedit sed deserunt corrupti dolor
+                    perferendis optio debitis rem, repellendus laborum at odit.
+                </div>
+                <div className={grid['col-md-3']}>
+                    <ListGroupComponent
+                        collection={navLinks.firstList}
+                        propKey={'id'}
+                        propText={'label'}
+                        borderless={true}
+                        onEmitEvent={handleNavigation}
+                    ></ListGroupComponent>
+                </div>
+                <div className={grid['col-md-3']}>
+                    <ListGroupComponent
+                        collection={navLinks.secondList}
+                        propKey={'id'}
+                        propText={'label'}
+                        borderless={true}
+                        onEmitEvent={handleNavigation}
+                    ></ListGroupComponent>
+                </div>
+                <div className={grid['col-md-3']}>
+                    <ListGroupComponent
+                        collection={navLinks.thirdList}
+                        propKey={'id'}
+                        propText={'label'}
+                        borderless={true}
+                        onEmitEvent={handleNavigation}
+                    ></ListGroupComponent>
+                </div>
             </div>
         </footer>
     );

@@ -1,7 +1,10 @@
-export const menuItems = {
+import { v4 as uuidv4 } from 'uuid';
+import { IFooterLink, IFooterNavLinks } from './interfaces';
+
+export const menuItems: any = {
     firstList: [
-        { route: '', label: 'Home' },
-        { route: '', label: 'Blog' },
+        { route: 'home', label: 'Home' },
+        { route: 'blog', label: 'Blog' },
         { route: '', label: 'Settings' },
         { route: '', label: 'Cartoons' },
     ],
@@ -29,3 +32,16 @@ export const menuItems = {
         { route: '', label: 'Kanye AI Model' },
     ],
 };
+
+const result = {} as IFooterNavLinks;
+
+for (const key in menuItems) {
+    if (Object.prototype.hasOwnProperty.call(menuItems, key)) {
+        result[key] = menuItems[key].map((item: IFooterLink) => ({
+            ...item,
+            id: uuidv4(),
+        }));
+    }
+}
+
+export const navLinks = result;

@@ -3,11 +3,8 @@ export interface IListGroup {
     collection: any[];
     propKey: string;
     propText: string;
+    shouldSetActiveIndex?: boolean;
     borderless?: boolean;
+
     onEmitEvent: (item: any) => void;
-}
-
-
-export interface IListItemStyle {
-    classActive: boolean;
 }
