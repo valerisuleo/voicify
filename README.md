@@ -40,6 +40,33 @@ Unit testing is crucial for several reasons:
 
 By integrating Jest into my workflow, I've ensured that each component in our pattern library is reliable, easy to maintain, and well-documented through practical examples.
 
+
+## Demonstrating Responsiveness and Component Library Efficiency 🎥
+
+To illustrate the responsiveness of the app and the efficiency of the component library, I've included screen recordings showcasing the app on different devices and the ease of creating a new instance of a button component:
+
+- **Phone Responsiveness**: [View Screen Recording](https://www.dropbox.com/scl/fi/fszz52h1auj6klly3silt/phone.mp4?rlkey=usw7i4r56z8ah3h1q5lvaqa8s&dl=0)
+- **Tablet Responsiveness**: [View Screen Recording](https://www.dropbox.com/scl/fi/gj4tbu8ztq60nudxvz3se/tablet.mp4?rlkey=6low3y9hc5492jv506ygzg91i&dl=0)
+- **Efficiency in Component Library (Button Instance Creation)**: [View Screen Recording](https://www.dropbox.com/scl/fi/1lb7j9ibi7hsundpwn51a/how_long_to_add_btn.mov?rlkey=g9ehbf1e18fn5ipexo48e7fmb&dl=0)
+
+These recordings provide a visual confirmation of the app's responsive design capabilities and the practicality of the component library in streamlining development.
+
+## Reflections
+
+### What Went Well
+
+- **Efficient Development**: The abstraction of Tailwind classes and the component library significantly sped up development, making it easier to maintain a consistent look and feel.
+- **Responsive Design**: The grid system worked wonders for managing layouts across devices, ensuring a seamless user experience.
+- **Unit Testing**: Implementing tests early on helped catch and fix issues quickly, reinforcing the reliability of the components.
+
+### Challenges and Learning Opportunities
+
+- **State Management Complexity**: As the app grew, managing state across components became more complex. This was a reminder of the importance of planning and potentially using context or state management libraries for larger projects.
+- **Performance Optimization**: Initial loading times highlighted the need for optimizing image sizes and considering lazy loading for a faster initial render.
+- **Accessibility Considerations**: Ensuring that the app was fully accessible was an ongoing challenge. It emphasized the need for regular accessibility audits and incorporating best practices from the start.
+
+- **Time Management and Scope**: Due to time constraints, I had to make some tough calls on what to prioritize. One such feature was the "giant pill" design element, which I couldn't implement in time. This was a reminder of the importance of agile development practices and being flexible with scope adjustments
+
 ## Wrap-Up
 
 Through this project, I've aimed to demonstrate not just my technical skills in React and responsive design but also my commitment to creating high-quality, maintainable software. I believe that thoughtful design choices, combined with a rigorous approach to testing, are key to building applications that stand the test of time.
