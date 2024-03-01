@@ -11,6 +11,7 @@ import { categories as mockData } from './mock';
 import { ICardHomePage, IPhoto } from './interaces';
 import { capitalizeFirstLetter } from '../library/common/utilities';
 import { ICategory } from '../library/common/interfaces/category';
+import LikeComponent from '../library/components/like/like';
 
 const HomePage = () => {
     const [cards, setCards] = useState<ICardHomePage[]>([]);
@@ -82,11 +83,29 @@ const HomePage = () => {
         return {
             header: {
                 children: (
-                    <ImageComponent
-                        src={item.thumbnailUrl}
-                        width={150}
-                        height={150}
-                    ></ImageComponent>
+                    <div style={{ position: 'relative' }}>
+                        {/* Parent div with relative positioning */}
+                        <ImageComponent
+                            src={item.thumbnailUrl}
+                            width={150}
+                            height={150}
+                        />
+                        <div
+                            style={{
+                                position: 'absolute', // Absolute positioning for the wrapper
+                                top: '0', // Position it at the top of the parent div
+                                right: '0', // Position it at the right of the parent div
+                                margin: '10px', // Optional margin for aesthetic spacing
+                            }}
+                        >
+                            <LikeComponent
+                                color="white"
+                                onEmitEvent={(isLike) =>
+                                    handleLike(isLike, item)
+                                }
+                            />
+                        </div>
+                    </div>
                 ),
             },
 
@@ -98,16 +117,45 @@ const HomePage = () => {
         };
     };
 
+    const handleLike = (isLike: boolean, current: ICardHomePage): void => {
+        setCards((prevCards) => {
+            return prevCards.map((card) => {
+                if (card.id === current.id) {
+                    // Found the card that was liked/unliked, update its isLike property
+                    return { ...card, isLike: isLike };
+                }
+                return card; // Return all other cards unchanged
+            });
+        });
+    };
+
     const cardCategoryProps = (item: ICardHomePage) => {
         return {
             header: {
                 children: (
-                    <ImageComponent
-                        src={item.thumbnailUrl}
-                        width={150}
-                        height={150}
-                        classes="rounded-3xl"
-                    ></ImageComponent>
+                    <div style={{ position: 'relative' }}>
+                        {/* Parent div with relative positioning */}
+                        <ImageComponent
+                            src={item.thumbnailUrl}
+                            width={150}
+                            height={150}
+                        />
+                        <div
+                            style={{
+                                position: 'absolute', // Absolute positioning for the wrapper
+                                top: '0', // Position it at the top of the parent div
+                                right: '0', // Position it at the right of the parent div
+                                margin: '10px', // Optional margin for aesthetic spacing
+                            }}
+                        >
+                            <LikeComponent
+                                color="white"
+                                onEmitEvent={(isLike) =>
+                                    handleLike(isLike, item)
+                                }
+                            />
+                        </div>
+                    </div>
                 ),
             },
 

@@ -1,5 +1,6 @@
 export interface ILike {
-    onEmitEvent: (item: boolean) => void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onEmitEvent: (item: any) => void;
     color?: string;
     size?: number;
 }
