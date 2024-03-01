@@ -139,6 +139,7 @@ const HomePage = () => {
                             src={item.thumbnailUrl}
                             width={150}
                             height={150}
+                            classes='rounded-3xl'
                         />
                         <div
                             style={{
