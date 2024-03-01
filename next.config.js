@@ -13,6 +13,11 @@ const nextConfig = {
         svgr: false,
     },
 
+        // Add this images property to your existing configuration
+        images: {
+            domains: ['via.placeholder.com'], // Add more domains as needed
+        },
+
     async redirects() {
         return [
             {

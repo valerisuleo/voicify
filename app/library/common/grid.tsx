@@ -1,5 +1,5 @@
 export const grid = {
-    container: 'max-w-full mx-auto p-8 sm:px-6 lg:px-8',
+    container: 'mx-auto px-4 sm:max-w-screen-sm sm:px-6 md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl',
     'container-fluid': 'w-full',
     // Rows
     row: 'p-2 w-full flex flex-wrap',
@@ -95,7 +95,7 @@ export const grid = {
 };
 
 // Define a type that includes all possible keys from the grid object
-type GridClassKey = keyof typeof grid;
+export type GridClassKey = keyof typeof grid;
 
 // Adjust the getCol function to use this type
 export function getCol(...classNames: GridClassKey[]): string {

@@ -1,104 +1,123 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import ChipsComponent from '../library/components/chips/chips';
 import CardComponent from '../library/components/card/card';
-import { ICard } from '../library/components/card/interfaces';
 import ImageComponent from '../library/components/image/image';
-import LikeComponent from '../library/components/like/like';
-import ButtonComponent from '../library/components/buttons/button';
-import { IBtn } from '../library/components/buttons/interfaces';
 import HeroComponent from '../library/components/hero/hero';
-import ListGroupComponent from '../library/components/list-group/list-group';
-import { IListGroup } from '../library/components/list-group/interface';
 import { getCol, grid } from '../library/common/grid';
-import { categories } from './mock';
-import styles from './home.module.scss';
-import useScreenDetect from '../library/common/useScreenDetect';
+import { categories as mockData } from './mock';
+import { ICardHomePage, IPhoto } from './interaces';
+import { capitalizeFirstLetter } from '../library/common/utilities';
+import { ICategory } from '../library/common/interfaces/category';
+
 const HomePage = () => {
-    const handleClick = () => {
-        console.log('fire');
-    };
+    const [cards, setCards] = useState<ICardHomePage[]>([]);
+    const [categories, setCategories] = useState<ICategory[]>([]);
 
-    const handleLike = () => {
-        console.log('like');
-    };
+    useEffect(() => {
+        getPhotos('8');
+        getCategories();
+    }, []);
 
-    const handleSelection = () => {
-        console.log('like');
-    };
+    async function getAll(queryParams: string): Promise<IPhoto[]> {
+        const promise = await fetch(
+            `https://jsonplaceholder.typicode.com/photos?_limit=${queryParams}`,
+            { cache: 'no-store' }
+        );
 
-    const propsCard: ICard = {
-        header: {
-            children: (
-                <ImageComponent
-                    src={'/avatar.jpg'}
-                    width={200}
-                    height={200}
-                ></ImageComponent>
-            ),
-        },
-
-        body: {
-            cardTitle: 'Elvis',
-            cardText: undefined,
-            children: (
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Obcaecati, ratione perferendis provident soluta accusamus
-                    ipsam! Quidem ipsa fugit minus incidunt illo deserunt,
-                    temporibus aut aliquam! Doloribus culpa soluta voluptatibus
-                    ad.
-                </p>
-            ),
-        },
-    };
-
-    const propsBtn: IBtn = {
-        label: 'primary',
-        classes: 'primary',
-        type: 'button',
-        onEmitEvent: handleClick,
-    };
-
-    const propsList: IListGroup = {
-        collection: [
-            {
-                id: '1',
-                name: 'Item 1',
-            },
-            {
-                id: '2',
-                name: 'Item 2',
-            },
-        ],
-        propKey: 'id',
-        propText: 'name',
-        onEmitEvent: handleSelection,
-        borderless: false,
-    };
-
-    const screenType = useScreenDetect();
-
-    function setWidth(): string {
-        let width = '60%';
-
-        switch (screenType) {
-            case 'desktop':
-                width = '60%';
-                break;
-            case 'tablet':
-                width = '80%';
-                break;
-            case 'mobile':
-                width = '100%';
-                break;
-            default:
-                break;
-        }
-
-        return width;
+        const response: IPhoto[] = await promise.json();
+        return response;
     }
+
+    function cardCategoryMaker(collection: IPhoto[]): ICardHomePage[] {
+        return collection.map((item) => {
+            return {
+                ...item,
+                isLike: false,
+                countUsers: '45k',
+                countLikes: '1k',
+                isHorizontal: false,
+            };
+        });
+    }
+
+    async function getPhotos(numberOfItems: string) {
+        const collection = await getAll(numberOfItems);
+        const cards = cardCategoryMaker(collection);
+        setCards(cards);
+    }
+
+    async function getCategoryList(
+        numberOfItems: string
+    ): Promise<ICardHomePage[]> {
+        const collection = await getAll(numberOfItems);
+        const cards = cardCategoryMaker(collection);
+        return cards;
+    }
+
+    async function getCategories() {
+        const categories: ICategory[] = [
+            {
+                counter: 127,
+                name: 'community',
+                label: 'community',
+                src: 'heart',
+                list: await getCategoryList('4'),
+            },
+            {
+                counter: 394,
+                name: 'voices',
+                label: 'more-voices',
+                src: 'note',
+                list: await getCategoryList('16'),
+            },
+        ];
+
+        setCategories(categories);
+    }
+
+    const cardProps = (item: ICardHomePage) => {
+        return {
+            header: {
+                children: (
+                    <ImageComponent
+                        src={item.thumbnailUrl}
+                        width={150}
+                        height={150}
+                    ></ImageComponent>
+                ),
+            },
+
+            body: {
+                cardTitle: item.title,
+                cardText: `${item.countUsers} uses - ${item.countLikes} likes`,
+            },
+            isHorizontal: item.isHorizontal,
+        };
+    };
+
+    const cardCategoryProps = (item: ICardHomePage) => {
+        return {
+            header: {
+                children: (
+                    <ImageComponent
+                        src={item.thumbnailUrl}
+                        width={150}
+                        height={150}
+                        classes="rounded-3xl"
+                    ></ImageComponent>
+                ),
+            },
+
+            body: {
+                cardTitle: item.title,
+                cardText: `${item.countUsers} uses - ${item.countLikes} likes`,
+            },
+            isHorizontal: item.isHorizontal,
+        };
+    };
 
     return (
         <Fragment>
@@ -122,11 +141,8 @@ const HomePage = () => {
                 </div>
             </HeroComponent>
 
-            <div
-                className={`${grid.row}`}
-                style={{ width: setWidth(), margin: 'auto' }}
-            >
-                {categories.map((item) => (
+            <div className={`${grid.row} mb-5 mt-20`}>
+                {mockData.map((item) => (
                     <div
                         className={`${getCol(
                             'col-xs-6',
@@ -147,39 +163,120 @@ const HomePage = () => {
                 ))}
             </div>
 
+            <div className={`${grid.row} mb-10`}>
+                {cards?.length &&
+                    cards.map((item) => {
+                        const props = cardProps(item);
+                        return (
+                            <div
+                                className={`${getCol(
+                                    'col-sm-6',
+                                    'col-md-6',
+                                    'col-lg-3'
+                                )}`}
+                                key={item.id}
+                            >
+                                <CardComponent
+                                    header={props.header}
+                                    body={props.body}
+                                />
+                            </div>
+                        );
+                    })}
+            </div>
 
+            {categories.map((category: ICategory, i) => (
+                <div key={i}>
+                    {/* Flex container */}
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <div style={{ maxWidth: '40px' }}>
+                            <ImageComponent
+                                src={`/categories/${category.src}.png`}
+                                width={100}
+                                height={100}
+                            />
+                        </div>
+                        <h1 className="font-extrabold ml-4 mr-2">
+                            {capitalizeFirstLetter(category.label)}
+                        </h1>
+                        <h1 className="font-extrabold tracking-tighter text-gray-400">
+                            {category.counter}
+                        </h1>
+                    </div>
+                    <div className={`${grid.row} mb-10`}>
+                        {category.list.map((item: ICardHomePage, j: number) => {
+                            const props = cardCategoryProps(item);
+
+                            return (
+                                <div
+                                    className={`${getCol(
+                                        'col-sm-6',
+                                        'col-md-6',
+                                        'col-lg-3'
+                                    )}`}
+                                    key={j}
+                                >
+                                    <CardComponent
+                                        header={props.header}
+                                        body={props.body}
+                                        borderless={true}
+                                    />
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            ))}
         </Fragment>
-
-        // <div className="">
-        //     <div className="m-6">
-
-        //     </div>
-        //     <ChipsComponent
-        //         label={'Music'}
-        //         classes={'secondary'}
-        //         src={'/avatar.jpg'}
-        //         width={100}
-        //         height={100}
-        //     ></ChipsComponent>
-
-        //     <div className="max-w-sm my-10">
-        //         <CardComponent {...propsCard}></CardComponent>
-        //     </div>
-
-        //     <div className="my-6">
-        //         <LikeComponent
-        //             color="pink"
-        //             onEmitEvent={handleLike}
-        //         ></LikeComponent>
-        //     </div>
-        //     <div className="m-6">
-        //         <ButtonComponent {...propsBtn}></ButtonComponent>
-        //     </div>
-        //     <div className="max-w-sm m-6">
-        //         <ListGroupComponent {...propsList}></ListGroupComponent>
-        //     </div>
-        // </div>
     );
 };
 
 export default HomePage;
+
+// NOT WORKING YET...
+// function generateGridLayout(data: any) {
+//     const horizontalItems = data.filter((item: any) => item.isHorizontal);
+//     const nonHorizontalItems = data.filter(
+//         (item: any) => !item.isHorizontal
+//     );
+//     let rows = [];
+
+//     if (horizontalItems.length === 1) {
+//         // First row: 1 horizontal item and 1 non-horizontal item
+//         const firstRow = [
+//             { ...horizontalItems[0], colSize: 'col-md-8' },
+//             { ...nonHorizontalItems[0], colSize: 'col-md-4' },
+//         ];
+
+//         // The rest of the items in their own row
+//         const secondRow = nonHorizontalItems
+//             .slice(1)
+//             .map((item: any) => ({ ...item, colSize: 'default' }));
+
+//         rows = [firstRow, secondRow];
+//     } else if (horizontalItems.length === 2) {
+//         // First row: 2 horizontal items
+//         const firstRow = horizontalItems.map((item: any) => ({
+//             ...item,
+//             colSize: 'col-md-6',
+//         }));
+
+//         // The rest of the items in their own row
+//         const secondRow = nonHorizontalItems.map((item: any) => ({
+//             ...item,
+//             colSize: 'default',
+//         }));
+
+//         rows = [firstRow, secondRow];
+//     } else {
+//         // If no horizontal items or more than expected, treat all as default in a single row
+//         const onlyRow = nonHorizontalItems.map((item: any) => ({
+//             ...item,
+//             colSize: 'default',
+//         }));
+//         rows = [onlyRow];
+//     }
+
+//     // Filtering out any empty rows
+//     return rows.filter((row) => row.length > 0);
+// }

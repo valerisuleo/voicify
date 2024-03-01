@@ -10,6 +10,7 @@ export interface ICard {
         children?: ReactNode;
     };
     borderless?: boolean;
+    sameHeight?: boolean;
 
 }
 
