@@ -5,15 +5,19 @@ const CardComponent = ({
     body,
     borderless,
     sameHeight = true,
+    horizontal = false, // New prop for horizontal layout
 }: ICard) => {
-    const cardBase = 'rounded-3xl overflow-hidden flex flex-col'; // Added flex and flex-col
+    // Conditionally set flex direction based on horizontal prop
+    const flexDirection = horizontal ? 'flex-row' : 'flex-col';
+    const cardBase = `rounded-3xl overflow-hidden flex ${flexDirection}`;
     const cardBorder = borderless ? '' : 'border border-gray-200';
-    const cardHeight = sameHeight ? 'h-full' : ''; // Ensures the card can fill the container height
+    const cardHeight = sameHeight ? 'h-full' : '';
     const cardClasses = `${cardBase} ${cardBorder} ${cardHeight}`;
 
-    const cardBody = 'px-6 py-4 flex flex-col flex-grow'; // Make card body a flex container
+    // Adjust cardBody for horizontal layout if needed
+    const cardBody = `px-6 py-4 flex ${horizontal ? '' : 'flex-col flex-grow'}`;
     const cardTitle = 'font-bold text-xl mb-2';
-    const cardText = 'text-gray-700 text-base mt-auto'; // Use mt-auto to push cardText to the bottom
+    const cardText = 'text-gray-700 text-base mt-auto';
 
     return (
         <div className={cardClasses}>
@@ -25,10 +29,11 @@ const CardComponent = ({
                 {body?.cardTitle && (
                     <div className={cardTitle}>{body.cardTitle}</div>
                 )}
-                {/* This div wraps non-bottom elements to ensure cardText can be pushed to the bottom */}
-                <div className="flex-grow">{body.children}</div>
+                <div className={`${horizontal ? '' : 'flex-grow'}`}>
+                    {body.children}
+                </div>
                 {body?.cardText && (
-                    <p className={cardText}>{body.cardText}</p> // This will sit at the bottom
+                    <p className={cardText}>{body.cardText}</p>
                 )}
             </div>
         </div>

@@ -4,7 +4,6 @@ export interface IPhoto {
     title: string;
     url: string;
     thumbnailUrl: string;
-
 }
 
 export interface ICardHomePage extends IPhoto {
@@ -12,4 +11,5 @@ export interface ICardHomePage extends IPhoto {
     countLikes: string;
     isLike: boolean;
     isHorizontal: boolean;
+    childred?: []
   }

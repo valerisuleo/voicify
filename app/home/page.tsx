@@ -2,120 +2,76 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import React, { Fragment, useEffect, useState } from 'react';
-import ChipsComponent from '../library/components/chips/chips';
 import CardComponent from '../library/components/card/card';
-import ImageComponent from '../library/components/image/image';
+import ChipsComponent from '../library/components/chips/chips';
 import HeroComponent from '../library/components/hero/hero';
-import { getCol, grid } from '../library/common/grid';
-import { categories as mockData } from './mock';
-import { ICardHomePage, IPhoto } from './interaces';
-import { capitalizeFirstLetter } from '../library/common/utilities';
-import { ICategory } from '../library/common/interfaces/category';
+import ImageComponent from '../library/components/image/image';
 import LikeComponent from '../library/components/like/like';
+import { capitalizeFirstLetter } from '../library/common/utilities';
+import { getCol, grid } from '../library/common/grid';
+import { ICategory } from '../library/common/interfaces/category';
+import { categories as mockData } from './mock';
+import { ICardHomePage, IPhoto } from './interfaces';
 
 const HomePage = () => {
     const [cards, setCards] = useState<ICardHomePage[]>([]);
     const [categories, setCategories] = useState<ICategory[]>([]);
 
     useEffect(() => {
-        getPhotos('8');
-        getCategories();
+        fetchPhotosAndUpdateState('8');
+        fetchAndSetCategories();
     }, []);
 
-    async function getAll(queryParams: string): Promise<IPhoto[]> {
-        const promise = await fetch(
-            `https://jsonplaceholder.typicode.com/photos?_limit=${queryParams}`,
+    async function fetchPhotos(limit: string): Promise<IPhoto[]> {
+        const response = await fetch(
+            `https://jsonplaceholder.typicode.com/photos?_limit=${limit}`,
             { cache: 'no-store' }
         );
-
-        const response: IPhoto[] = await promise.json();
-        return response;
+        const photos: IPhoto[] = await response.json();
+        return photos;
     }
 
-    function cardCategoryMaker(collection: IPhoto[]): ICardHomePage[] {
-        return collection.map((item) => {
-            return {
-                ...item,
-                isLike: false,
-                countUsers: '45k',
-                countLikes: '1k',
-                isHorizontal: false,
-            };
-        });
+    function transformPhotosToCards(photos: IPhoto[]): ICardHomePage[] {
+        return photos.map((photo) => ({
+            ...photo,
+            isLike: false,
+            countUsers: '45k',
+            countLikes: '1k',
+            isHorizontal: false,
+        }));
     }
 
-    async function getPhotos(numberOfItems: string) {
-        const collection = await getAll(numberOfItems);
-        const cards = cardCategoryMaker(collection);
+    async function fetchPhotosAndUpdateState(limit: string) {
+        const photos = await fetchPhotos(limit);
+        const cards = transformPhotosToCards(photos);
         setCards(cards);
     }
 
-    async function getCategoryList(
-        numberOfItems: string
-    ): Promise<ICardHomePage[]> {
-        const collection = await getAll(numberOfItems);
-        const cards = cardCategoryMaker(collection);
-        return cards;
+    async function fetchCategoryCards(limit: string): Promise<ICardHomePage[]> {
+        const photos = await fetchPhotos(limit);
+        return transformPhotosToCards(photos);
     }
 
-    async function getCategories() {
-        const categories: ICategory[] = [
+    async function fetchAndSetCategories() {
+        const categoriesData: ICategory[] = [
             {
                 counter: 127,
                 name: 'community',
                 label: 'community',
                 src: 'heart',
-                list: await getCategoryList('4'),
+                list: await fetchCategoryCards('4'),
             },
             {
                 counter: 394,
                 name: 'voices',
                 label: 'more-voices',
                 src: 'note',
-                list: await getCategoryList('16'),
+                list: await fetchCategoryCards('16'),
             },
         ];
 
-        setCategories(categories);
+        setCategories(categoriesData);
     }
-
-    const cardProps = (item: ICardHomePage) => {
-        return {
-            header: {
-                children: (
-                    <div style={{ position: 'relative' }}>
-                        {/* Parent div with relative positioning */}
-                        <ImageComponent
-                            src={item.thumbnailUrl}
-                            width={150}
-                            height={150}
-                        />
-                        <div
-                            style={{
-                                position: 'absolute', // Absolute positioning for the wrapper
-                                top: '0', // Position it at the top of the parent div
-                                right: '0', // Position it at the right of the parent div
-                                margin: '10px', // Optional margin for aesthetic spacing
-                            }}
-                        >
-                            <LikeComponent
-                                color="white"
-                                onEmitEvent={(isLike) =>
-                                    handleLike(isLike, item)
-                                }
-                            />
-                        </div>
-                    </div>
-                ),
-            },
-
-            body: {
-                cardTitle: item.title,
-                cardText: `${item.countUsers} uses - ${item.countLikes} likes`,
-            },
-            isHorizontal: item.isHorizontal,
-        };
-    };
 
     const handleLike = (isLike: boolean, current: ICardHomePage): void => {
         setCards((prevCards) => {
@@ -129,24 +85,26 @@ const HomePage = () => {
         });
     };
 
-    const cardCategoryProps = (item: ICardHomePage) => {
+    const generateCardProps = (
+        item: ICardHomePage,
+        additionalClasses?: string
+    ) => {
         return {
             header: {
                 children: (
                     <div style={{ position: 'relative' }}>
-                        {/* Parent div with relative positioning */}
                         <ImageComponent
                             src={item.thumbnailUrl}
                             width={150}
                             height={150}
-                            classes='rounded-3xl'
+                            classes={additionalClasses} // Dynamically add any additional classes
                         />
                         <div
                             style={{
-                                position: 'absolute', // Absolute positioning for the wrapper
-                                top: '0', // Position it at the top of the parent div
-                                right: '0', // Position it at the right of the parent div
-                                margin: '10px', // Optional margin for aesthetic spacing
+                                position: 'absolute',
+                                top: '0',
+                                right: '0',
+                                margin: '10px',
                             }}
                         >
                             <LikeComponent
@@ -170,25 +128,27 @@ const HomePage = () => {
 
     return (
         <Fragment>
-            <HeroComponent
-                variant="image"
-                imageSrc="/hero.png"
-                isBreakingGrid={true}
-            >
-                <div className="bg-slate-600 bg-opacity-20 rounded-full px-4 py-8 md:py-12 md:px-8 text-center">
-                    <h1 className="font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tight">
-                        Create song covers
-                    </h1>
-                    <h1 className="font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tight">
-                        using any voice with AI
-                    </h1>
+            <div>
+                <HeroComponent
+                    variant="image"
+                    imageSrc="/hero.png"
+                    isBreakingGrid={true}
+                >
+                    <div className="bg-slate-600 bg-opacity-20 rounded-full px-4 py-8 md:py-12 md:px-8 text-center">
+                        <h1 className="font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tight">
+                            Create song covers
+                        </h1>
+                        <h1 className="font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tight">
+                            using any voice with AI
+                        </h1>
 
-                    <p className="text-white font-semibold text-lg md:text-xl lg:text-2xl mt-4 md:mt-6">
-                        The #1 platform for making high quality AI covers in
-                        seconds!
-                    </p>
-                </div>
-            </HeroComponent>
+                        <p className="text-white font-semibold text-lg md:text-xl lg:text-2xl mt-4 md:mt-6">
+                            The #1 platform for making high quality AI covers in
+                            seconds!
+                        </p>
+                    </div>
+                </HeroComponent>
+            </div>
 
             <div className={`${grid.row} mb-5 mt-20`}>
                 {mockData.map((item) => (
@@ -215,7 +175,7 @@ const HomePage = () => {
             <div className={`${grid.row} mb-10`}>
                 {cards?.length &&
                     cards.map((item) => {
-                        const props = cardProps(item);
+                        const props = generateCardProps(item);
                         return (
                             <div
                                 className={`${getCol(
@@ -254,7 +214,10 @@ const HomePage = () => {
                     </div>
                     <div className={`${grid.row} mb-10`}>
                         {category.list.map((item: ICardHomePage, j: number) => {
-                            const props = cardCategoryProps(item);
+                            const props = generateCardProps(
+                                item,
+                                'rounded-3xl'
+                            );
 
                             return (
                                 <div

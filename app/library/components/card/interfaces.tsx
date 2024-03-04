@@ -11,6 +11,7 @@ export interface ICard {
     };
     borderless?: boolean;
     sameHeight?: boolean;
+    horizontal?: boolean;
 
 }
 
