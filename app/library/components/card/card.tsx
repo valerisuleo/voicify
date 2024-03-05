@@ -7,38 +7,39 @@ const CardComponent = ({
     sameHeight = true,
     isHorizontal, // New prop for isHorizontal layout
 }: ICard) => {
-
-    console.log("isHorizontal", isHorizontal);
-    
-    // Conditionally set flex direction based on isHorizontal prop
-    const flexDirection = isHorizontal ? 'flex-row' : 'flex-col';
-    const cardBase = `rounded-3xl overflow-hidden flex ${flexDirection}`;
-    const cardBorder = borderless ? '' : 'border border-gray-200';
-    const cardHeight = sameHeight ? 'h-full' : '';
-    const cardClasses = `${cardBase} ${cardBorder} ${cardHeight}`;
-
-    // Adjust cardBody for isHorizontal layout if needed
-    const cardBody = `px-6 py-4 flex ${isHorizontal ? '' : 'flex-col flex-grow'}`;
-    const cardTitle = 'font-bold text-xl mb-2';
-    const cardText = 'text-gray-700 text-base mt-auto';
+    const cardText = body?.cardText ? body.cardText : '';
+    const borderClass = borderless ? '' : 'border border-gray-200';
+    const heightClass = sameHeight ? 'h-full' : '';
 
     return (
-        <div className={cardClasses}>
-            {header.children && (
-                <div className="card-header">{header.children}</div>
-            )}
-
-            <div className={cardBody}>
-                {body?.cardTitle && (
-                    <div className={cardTitle}>{body.cardTitle}</div>
-                )}
-                <div className={`${isHorizontal ? '' : 'flex-grow'}`}>
-                    {body.children}
+        <div
+            className={`${heightClass} ${borderClass} rounded-3xl overflow-hidden`}
+        >
+            {isHorizontal ? (
+                <div className={`flex flex-row ${heightClass}`}>
+                    <div className="w-1/2">{header.children}</div>
+                    <div className="w-1/2 px-6 py-4 flex flex-col justify-between">
+                        <div className="font-bold text-xl mb-2">
+                            {body.cardTitle}
+                        </div>
+                        <div>{body.children}</div>
+                        <p className="text-gray-700 text-base">{cardText}</p>
+                    </div>
                 </div>
-                {body?.cardText && (
-                    <p className={cardText}>{body.cardText}</p>
-                )}
-            </div>
+            ) : (
+                <div className={`flex flex-col ${heightClass}`}>
+                    <div className="w-full">{header.children}</div>
+                    <div className="px-6 py-4 flex flex-col flex-grow">
+                        <div className="font-bold text-xl mb-2">
+                            {body.cardTitle}
+                        </div>
+                        <div className="flex-grow">{body.children}</div>
+                        <p className="text-gray-700 text-base mt-auto">
+                            {cardText}
+                        </p>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

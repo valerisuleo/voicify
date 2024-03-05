@@ -21,7 +21,7 @@ const HomePage = () => {
     const [categories, setCategories] = useState<ICategory[]>([]);
 
     useEffect(() => {
-        fetchPhotosAndUpdateState('8');
+        fetchPhotosAndUpdateState('6');
         fetchAndSetCategories();
     }, []);
 
@@ -178,7 +178,6 @@ const HomePage = () => {
                 {cards?.length > 0 &&
                     cards.map((item) => {
                         const props = generateCardProps(item);
-                        // Use item.isHorizontal to assign class
                         const itemClass = item.isHorizontal
                             ? `${styles['flex-item-horizontal']}`
                             : `${styles['flex-item']}`;

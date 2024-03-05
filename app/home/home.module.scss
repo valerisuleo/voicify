@@ -3,13 +3,12 @@
     flex-wrap: wrap;
     gap: 20px; /* Adjust the space between items as needed */
     margin-bottom: 10px;
-  }
-  
-  .flex-item {
+}
+
+.flex-item {
     flex: 1 1 200px; /* Flex items will now try to occupy at least 200px but can grow if there's space */
-  }
-  
-  .flex-item-horizontal {
-    flex: 1 1 80%; /* Horizontal items will try to take up 80% of the container's width */
-  }
-  
+}
+
+.flex-item-horizontal {
+    flex: 1 1 70%; /* Horizontal items will try to take up 80% of the container's width */
+}
