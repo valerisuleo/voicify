@@ -12,8 +12,11 @@ import { getCol, grid } from '../library/common/grid';
 import { ICategory } from '../library/common/interfaces/category';
 import { categories as mockData } from './mock';
 import { ICardHomePage, IPhoto } from './interfaces';
+import styles from './home.module.scss';
 
 const HomePage = () => {
+    const heroTitle =
+        'font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tight';
     const [cards, setCards] = useState<ICardHomePage[]>([]);
     const [categories, setCategories] = useState<ICategory[]>([]);
 
@@ -37,13 +40,28 @@ const HomePage = () => {
             isLike: false,
             countUsers: '45k',
             countLikes: '1k',
-            isHorizontal: false,
+            isHorizontal: photo.id === 1 || false,
         }));
     }
 
     async function fetchPhotosAndUpdateState(limit: string) {
         const photos = await fetchPhotos(limit);
         const cards = transformPhotosToCards(photos);
+
+        const horizontalsCards = cards.filter((item) => item.isHorizontal);
+        const regularCards = cards.filter((item) => !item.isHorizontal);
+
+        console.log(cards);
+
+        // for (let i = 0; i < horizontalsCards.length; i++) {
+        //     if (regularCards[i]) {
+        //         myArr.push(regularCards[i]);
+        //         regularCards.splice(i, 1);
+        //     }
+        // }
+
+        console.log('regularCards', regularCards);
+
         setCards(cards);
     }
 
@@ -89,6 +107,9 @@ const HomePage = () => {
         item: ICardHomePage,
         additionalClasses?: string
     ) => {
+
+        console.log('item', item);
+        
         return {
             header: {
                 children: (
@@ -128,28 +149,23 @@ const HomePage = () => {
 
     return (
         <Fragment>
-            <div>
-                <HeroComponent
-                    variant="image"
-                    imageSrc="/hero.png"
-                    isBreakingGrid={true}
-                >
-                    <div className="bg-slate-600 bg-opacity-20 rounded-full px-4 py-8 md:py-12 md:px-8 text-center">
-                        <h1 className="font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tight">
-                            Create song covers
-                        </h1>
-                        <h1 className="font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tight">
-                            using any voice with AI
-                        </h1>
+            <HeroComponent
+                variant="image"
+                imageSrc="/hero.png"
+                isBreakingGrid={true}
+            >
+                <div className="bg-slate-600 bg-opacity-20 rounded-full px-4 py-8 md:py-12 md:px-8 text-center">
+                    <h1 className={heroTitle}>Create song covers</h1>
+                    <h1 className={heroTitle}>using any voice with AI</h1>
 
-                        <p className="text-white font-semibold text-lg md:text-xl lg:text-2xl mt-4 md:mt-6">
-                            The #1 platform for making high quality AI covers in
-                            seconds!
-                        </p>
-                    </div>
-                </HeroComponent>
-            </div>
+                    <p className="text-white font-semibold text-lg md:text-xl lg:text-2xl mt-4 md:mt-6">
+                        The #1 platform for making high quality AI covers in
+                        seconds!
+                    </p>
+                </div>
+            </HeroComponent>
 
+            {/* ______________________CHIPS______________________ */}
             <div className={`${grid.row} mb-5 mt-20`}>
                 {mockData.map((item) => (
                     <div
@@ -172,28 +188,28 @@ const HomePage = () => {
                 ))}
             </div>
 
-            <div className={`${grid.row} mb-10`}>
-                {cards?.length &&
+            {/* ____________________PROMOTED____________________ */}
+            <div className={styles['flex-container']}>
+                {cards?.length > 0 &&
                     cards.map((item) => {
                         const props = generateCardProps(item);
+                        // Use item.isHorizontal to assign class
+                        const itemClass = item.isHorizontal
+                            ? `${styles['flex-item-horizontal']}`
+                            : `${styles['flex-item']}`;
                         return (
-                            <div
-                                className={`${getCol(
-                                    'col-sm-6',
-                                    'col-md-6',
-                                    'col-lg-3'
-                                )}`}
-                                key={item.id}
-                            >
+                            <div className={`${itemClass}`} key={item.id}>
                                 <CardComponent
                                     header={props.header}
                                     body={props.body}
+                                    isHorizontal={props.isHorizontal}
                                 />
                             </div>
                         );
                     })}
             </div>
 
+            {/* ____________________CATEGORIES____________________ */}
             {categories.map((category: ICategory, i) => (
                 <div key={i}>
                     {/* Flex container */}
@@ -244,51 +260,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-// NOT WORKING YET...
-// function generateGridLayout(data: any) {
-//     const horizontalItems = data.filter((item: any) => item.isHorizontal);
-//     const nonHorizontalItems = data.filter(
-//         (item: any) => !item.isHorizontal
-//     );
-//     let rows = [];
-
-//     if (horizontalItems.length === 1) {
-//         // First row: 1 horizontal item and 1 non-horizontal item
-//         const firstRow = [
-//             { ...horizontalItems[0], colSize: 'col-md-8' },
-//             { ...nonHorizontalItems[0], colSize: 'col-md-4' },
-//         ];
-
-//         // The rest of the items in their own row
-//         const secondRow = nonHorizontalItems
-//             .slice(1)
-//             .map((item: any) => ({ ...item, colSize: 'default' }));
-
-//         rows = [firstRow, secondRow];
-//     } else if (horizontalItems.length === 2) {
-//         // First row: 2 horizontal items
-//         const firstRow = horizontalItems.map((item: any) => ({
-//             ...item,
-//             colSize: 'col-md-6',
-//         }));
-
-//         // The rest of the items in their own row
-//         const secondRow = nonHorizontalItems.map((item: any) => ({
-//             ...item,
-//             colSize: 'default',
-//         }));
-
-//         rows = [firstRow, secondRow];
-//     } else {
-//         // If no horizontal items or more than expected, treat all as default in a single row
-//         const onlyRow = nonHorizontalItems.map((item: any) => ({
-//             ...item,
-//             colSize: 'default',
-//         }));
-//         rows = [onlyRow];
-//     }
-
-//     // Filtering out any empty rows
-//     return rows.filter((row) => row.length > 0);
-// }
