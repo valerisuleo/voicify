@@ -48,20 +48,6 @@ const HomePage = () => {
         const photos = await fetchPhotos(limit);
         const cards = transformPhotosToCards(photos);
 
-        const horizontalsCards = cards.filter((item) => item.isHorizontal);
-        const regularCards = cards.filter((item) => !item.isHorizontal);
-
-        console.log(cards);
-
-        // for (let i = 0; i < horizontalsCards.length; i++) {
-        //     if (regularCards[i]) {
-        //         myArr.push(regularCards[i]);
-        //         regularCards.splice(i, 1);
-        //     }
-        // }
-
-        console.log('regularCards', regularCards);
-
         setCards(cards);
     }
 
@@ -107,9 +93,8 @@ const HomePage = () => {
         item: ICardHomePage,
         additionalClasses?: string
     ) => {
-
         console.log('item', item);
-        
+
         return {
             header: {
                 children: (
